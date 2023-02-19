@@ -1,4 +1,9 @@
 using Api_QLKhachSan_N2.Entities;
+using Api_QLKhachSan_N2.Interface;
+using Api_QLKhachSan_N2.repositories;
+using Api_QLKhachSan_N2.Repositories;
+using Api_QLKhachSan_N2.services;
+using Api_QLKhachSan_N2.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,10 +50,32 @@ namespace Api_QLKhachSan_N2
             });
 
             services.AddControllers();
+            services.AddCors(o =>
+            {
+                o.AddPolicy("AllowAll", builder =>
+                    builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                );
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api_QLKhachSan_N2", Version = "v1" });
             });
+            services.AddScoped<IGuestRepository, GuestRepository>();
+            services.AddScoped<IGuestService, GuestService>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IServiceService, ServiceService>();
+            services.AddScoped<IServiceRepository, ServiceRepository>();
+            services.AddScoped<IRoomService, RoomService>();
+            services.AddScoped<IRoomRepository, RoomRepository>();
+            services.AddScoped<IOrderRoomService, OrderRoomService>();
+            services.AddScoped<IOrderRoomRepository, OrderRoomRepository>();
+            services.AddScoped<IOrderServiceService, OrderServiceService>();
+            services.AddScoped<IOrderServiceRepository, OrderServiceRepository>();
+            services.AddScoped<IBillService, BillService>();
+            services.AddScoped<IBillRepository, BillRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +90,7 @@ namespace Api_QLKhachSan_N2
 
             app.UseHttpsRedirection();
 
+            app.UseCors("AllowAll");
             app.UseRouting();
 
             app.UseAuthentication();

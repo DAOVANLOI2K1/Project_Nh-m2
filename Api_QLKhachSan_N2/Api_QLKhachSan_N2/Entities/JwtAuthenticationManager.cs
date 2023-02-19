@@ -1,6 +1,4 @@
-﻿using Dapper;
-using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
+﻿using Api_QLKhachSan_N2.Interface;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -12,11 +10,12 @@ namespace Api_QLKhachSan_N2.Entities
 {
     public class JwtAuthenticationManager
     {
-        public JwtAuthenticationManager(IConfiguration configuration)
+        public JwtAuthenticationManager(IAccountService accountService)
         {
-            Configuration = configuration;
+            _accountService = accountService;
         }
-        public IConfiguration Configuration { get; }
+        public IAccountService _accountService;
+
         public JwtAuthResponse Authenticate(string userName, string password)
         {
             string KQ = KiemTra(userName, password);
@@ -50,24 +49,19 @@ namespace Api_QLKhachSan_N2.Entities
 
         public string KiemTra(string userName, string password)
         {
-            try
+              try
             {
-                var appSetting = Configuration.GetSection("AppSetting");
-                var connectionString = appSetting.GetValue<string>("ConnectionString");
-                SqlConnection myConnection = new SqlConnection(connectionString);
-                myConnection.Open();
-
-                var getProcedure = "getAllTaiKhoan";
-
-                var results = myConnection.QueryMultiple(getProcedure, commandType: System.Data.CommandType.StoredProcedure);
-
-                var taikhoans = results.Read<TaiKhoan>();
-                foreach (var taikhoan in taikhoans)
+                var taikhoans = _accountService.GetAllAccount();
+                if(taikhoans != null)
                 {
-                    if (taikhoan.TenDangNhap == userName && taikhoan.MatKhau == password)
+                    foreach (var taikhoan in taikhoans)
                     {
-                        return taikhoan.VaiTro;
+                        if (taikhoan.TenDangNhap == userName && taikhoan.MatKhau == password)
+                        {
+                            return taikhoan.Role;
+                        }
                     }
+                    return null;
                 }
                 return null;
             }

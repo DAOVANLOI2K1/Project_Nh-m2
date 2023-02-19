@@ -71,3 +71,8 @@ D:\Admin\Documents\code\Nhom2_usol\Api_QLKhachSan_N2\Api_QLKhachSan_N2\bin\Debug
 D:\Admin\Documents\code\Nhom2_usol\Api_QLKhachSan_N2\Api_QLKhachSan_N2\bin\Debug\net5.0\Newtonsoft.Json.dll
 D:\Admin\Documents\code\Nhom2_usol\Api_QLKhachSan_N2\Api_QLKhachSan_N2\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
 D:\Admin\Documents\code\Nhom2_usol\Api_QLKhachSan_N2\Api_QLKhachSan_N2\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
+D:\Admin\Documents\code\Nhom2_usol\Api_QLKhachSan_N2\Api_QLKhachSan_N2\obj\Debug\net5.0\staticwebassets\Api_QLKhachSan_N2.StaticWebAssets.Pack.cache
+D:\Admin\Documents\code\Nhom2_usol\Api_QLKhachSan_N2\Api_QLKhachSan_N2\obj\Debug\net5.0\staticwebassets\msbuild.Api_QLKhachSan_N2.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Admin\Documents\code\Nhom2_usol\Api_QLKhachSan_N2\Api_QLKhachSan_N2\obj\Debug\net5.0\staticwebassets\msbuild.build.Api_QLKhachSan_N2.props
+D:\Admin\Documents\code\Nhom2_usol\Api_QLKhachSan_N2\Api_QLKhachSan_N2\obj\Debug\net5.0\staticwebassets\msbuild.buildMultiTargeting.Api_QLKhachSan_N2.props
+D:\Admin\Documents\code\Nhom2_usol\Api_QLKhachSan_N2\Api_QLKhachSan_N2\obj\Debug\net5.0\staticwebassets\msbuild.buildTransitive.Api_QLKhachSan_N2.props
