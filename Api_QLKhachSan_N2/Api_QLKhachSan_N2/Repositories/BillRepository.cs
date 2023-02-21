@@ -172,5 +172,26 @@ namespace Api_QLKhachSan_N2.Repositories
                 return null;
             }
         }
+        public IEnumerable<Bill> getBillByGuestID(string? guestID)
+        {
+            // Kết nối DB
+            using (SqlServerConnection = new SqlConnection(configuration.GetConnectionString("LOIDV")))
+            {
+                // Chuẩn bị proc
+                var getProcedure = "Proc_Bill_GetByGuestID";
+
+                // Chuẩn bị tham số cho proc
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@CMT", guestID);
+
+                // Thực thi proc
+                var result = SqlServerConnection.QueryMultiple(getProcedure, parameters, commandType: System.Data.CommandType.StoredProcedure);
+                if (result != null)
+                {
+                    return result.Read<Bill>();
+                }
+                return null;
+            }
+        }
     }
 }

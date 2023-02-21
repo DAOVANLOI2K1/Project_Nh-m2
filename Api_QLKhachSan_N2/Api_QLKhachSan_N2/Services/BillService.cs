@@ -47,5 +47,9 @@ namespace Api_QLKhachSan_N2.Services
         {
             return _billRepository.UpdateBill(customerID);
         }
+        public IEnumerable<Bill> getBillByGuestID(string guestID)
+        {
+            return _billRepository.getBillByGuestID(guestID);
+        }
     }
 }

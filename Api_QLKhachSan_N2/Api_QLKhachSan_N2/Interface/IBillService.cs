@@ -13,5 +13,6 @@ namespace Api_QLKhachSan_N2.Interface
         double? getBill_Payment([FromQuery] string? customerID);
         IEnumerable<OrderServiceResponse> getBill_OrderService([FromQuery] string? customerID);
         IEnumerable<OrderRoomResponse> getBill_OrderRoom([FromQuery] string? customerID);
+        IEnumerable<Bill> getBillByGuestID(string? guestID);
     }
 }

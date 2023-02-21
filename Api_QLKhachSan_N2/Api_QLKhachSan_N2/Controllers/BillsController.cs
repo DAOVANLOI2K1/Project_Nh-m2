@@ -205,5 +205,31 @@ namespace Api_QLKhachSan_N2.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        // Lấy hóa đơn theo CMT khách hàng
+        [Route("/api/v1/Bills/GetBillByGuestID")]
+        [HttpGet]
+        [Authorize]
+        [SwaggerResponse(StatusCodes.Status200OK, type: typeof(List<Bill>))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest)]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError)]
+        public IActionResult getBillByGuestID(string? guestID)
+        {
+            try
+            {
+                var result = _billService.getBillByGuestID(guestID);
+
+                // Xử lý trả về của DB
+                if (result != null)
+                {
+                    return StatusCode(StatusCodes.Status200OK, result);
+                }
+                return StatusCode(StatusCodes.Status400BadRequest, "e002");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("e001");
+            }
+        }
     }
 }

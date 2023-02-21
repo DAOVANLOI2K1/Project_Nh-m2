@@ -11,6 +11,9 @@ namespace Api_QLKhachSan_N2.Entities
         /// ID đặt phòng
         /// </summary>
         public Guid? IDDP { get; set; }
+        public string TenPhong { get; set; }
+        public string HoTen { get; set; }
+        public string TenDV { get; set; }
 
         /// <summary>
         /// ID gọi dịch vụ
