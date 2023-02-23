@@ -5,20 +5,19 @@ class RoomType extends Component{
     constructor(){
         super();
         this.state={
-            RoomType: []
+            RoomType: [],
+            urlApiRoomType: "https://localhost:5001/api/v1/RoomType"
         }
     }
-    
     componentDidMount(){
-        axios.get("https://localhost:5001/api/v1/RoomType")
+        axios.get(this.state.urlApiRoomType)
         .then((response) => {
             this.setState({
                 RoomType: response.data
             })
         });
     }
-    
-       rederRoomType =()=>{
+       renderRoomType =()=>{
             console.log(this.state.RoomType)
             return this.state.RoomType.map((data,index) =>{
                 return(
@@ -46,15 +45,13 @@ class RoomType extends Component{
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.rederRoomType()}
+                                {this.renderRoomType()}
                             </tbody>
                         </table>
                     </div>
                 </div>
             )
-            
        }
-              
     }
 
 export default RoomType;

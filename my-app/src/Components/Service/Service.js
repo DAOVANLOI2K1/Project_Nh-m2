@@ -9,6 +9,7 @@ class Service extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      urlApiServiceDefault: 'https://localhost:5001/api/v1/Services',
       // for get list
       showListService: true,
       services: [],
@@ -59,13 +60,13 @@ class Service extends Component {
   }
 
   componentDidMount = (
-    url = "https://localhost:5001/api/v1/Services"
+    url = this.state.urlApiServiceDefault
   ) => {
     this.getData(url);
   };
 
   handleSearch = (search) => {
-    let url = "https://localhost:5001/api/v1/Services" + search
+    let url = this.state.urlApiServiceDefault + search;
     this.componentDidMount(url);
 
   }
@@ -89,9 +90,6 @@ class Service extends Component {
     });
   };
 
-
-
-  // chưa sử lý đượcccccccccccccccccccccccccccccccc số
   clearInsertForm = () => {
     this.setState({
       tenDV: "",
@@ -146,7 +144,7 @@ class Service extends Component {
   getNewCode = () => {
     let config = this.getConfigToken();
     axios
-      .get("https://localhost:5001/api/v1/Services/new-code", config)
+      .get(this.state.urlApiServiceDefault + "/new-code", config)
       .then((response) => {
         this.setState({
           newcode: response.data,
@@ -157,7 +155,7 @@ class Service extends Component {
   postData = () => {
     let config = this.getConfigToken();
     axios
-      .post("https://localhost:5001/api/v1/Services", {
+      .post(this.state.urlApiServiceDefault, {
         tenDV: this.state.tenDV,
         maDV: this.state.newcode,
         giaTien: this.state.giaTien,
@@ -199,7 +197,7 @@ class Service extends Component {
 
   // HTTP DELETE
   deleteService = (dvid) => {
-    var url = "https://localhost:5001/api/v1/Services/" + dvid;
+    var url =  this.state.urlApiServiceDefault + "/" + dvid;
     let config = this.getConfigToken();
     axios
       .delete(url, config)
@@ -246,8 +244,8 @@ class Service extends Component {
       text: "Thao tác này có thể không hoàn tác được!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Đồng ý, xóa nó!',
-      cancelButtonText: 'Không, cancel!',
+      confirmButtonText: 'Xoá',
+      cancelButtonText: 'Hủy',
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
@@ -295,7 +293,7 @@ class Service extends Component {
   }
 
   putData = (dvid) => {
-    var url = "https://localhost:5001/api/v1/Services/" + dvid;
+    var url = this.state.urlApiServiceDefault + "/" + dvid;
     let config = this.getConfigToken();
     console.log({
       tenDV: this.state.tenDV,
@@ -359,9 +357,10 @@ class Service extends Component {
     return this.state.services.map((service, index) => {
       return (
         <tr>
-          <td style={{ width: "10%" }} className="text-center">
+          <td className="text-center" style={{width:'50px'}}>
             {index + 1}
           </td>
+<<<<<<< HEAD
           <td>{service.tenDV}</td>
           <td>{this.formatMoney(service.giaTien)}</td>
           <td>{service.hoatDong}</td>
@@ -378,6 +377,26 @@ class Service extends Component {
                     </div>
                 </div>
             </div> 
+=======
+          <td style={{width:'200px'}}>{service.tenDV}</td>
+          <td style={{width:'100px'}}>{this.formatMoney(service.giaTien)}</td>
+          <td style={{width:'100px'}}>{service.hoatDong}</td>
+          <td style={{width:'100px'}}>{service.donVi}</td>
+          <td style={{width:'100px'}}>{service.moTa}</td>
+          <td style={{width:'100px'}}>
+            <button type="button" className="btn btn-success btn-sm"
+              onClick={() => this.onServiceEditForm(service)}
+            >
+              Chỉnh sửa
+            </button>
+            <button
+              type="button"
+              className="btn btn-danger btn-sm"
+              onClick={() => this.showDeleteConfirmAlert(service)}
+            >
+              Xóa
+            </button>
+>>>>>>> loihoangkim
           </td>
         </tr>
       );

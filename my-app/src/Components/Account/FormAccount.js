@@ -24,10 +24,13 @@ class FormAccount extends Component {
     if (!numbersOnly.test(soDienThoai)) {
       errorOfSoDienThoai += 'Số điện thoại có định dạng không đúng';
     }
+<<<<<<< HEAD
     var firstPhoneNumber = /((09|03|07|08|05)+([0-9]{8})\b)/g;
     if(!firstPhoneNumber.test(soDienThoai)){
       errorOfSoDienThoai += 'Đầu số không hợp lệ!';
     }
+=======
+>>>>>>> loihoangkim
     if(soDienThoai.length > 20) {
       errorOfSoDienThoai += 'Số điện thoại có độ dài tối đa 20 ký tự';
     }

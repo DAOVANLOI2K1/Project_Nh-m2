@@ -2,11 +2,9 @@ import React, { Component } from "react";
 
 class ServiceList extends Component {
     render() {
-        const styleForContainer = {
-            width: 1200,
-        }
-        if (this.props.showListService === false ) return null;
+        if (this.props.showListService === false) return null;
         return (
+<<<<<<< HEAD
             <div className="container" style={styleForContainer} >
                 <div className="section1 flex_center">
                     <h1 className="title_content">Danh sách dịch vụ</h1>
@@ -18,6 +16,10 @@ class ServiceList extends Component {
                             Thêm dịch vụ
                     </button>
                 </div>
+=======
+            <div className="container" >
+                <h1 className="title_content">Danh sách dịch vụ</h1>
+>>>>>>> loihoangkim
                 <div className="search_option">
                     <input
                         type="text"
@@ -32,26 +34,26 @@ class ServiceList extends Component {
                 </div>
                 {/* end search bar */}
 
-                <div className="table-box">
-                <table className="table table-bordered" id="serviceGrid">
-                    <thead className="thead-dark">
-                        <tr>
-                            <th style={{ width: "10%" }} className="text-center">
-                                STT
-                            </th>
-                            <th>Tên dịch vụ</th>
-                            <th>Giá tiền</th>
-                            <th>Hoạt động</th>
-                            <th>Đơn vị</th>
-                            <th style={{ width: "15%" }}>Mô tả</th>
-                            <th style={{ width: "10%" }}>Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody>{this.props.renderService()}</tbody>
-                </table>
+                <div>
+                    <table className="table table-bordered" id="serviceGrid">
+                        <thead className="thead-dark">
+                            <tr>
+                                <th className="text-center" style={{width:'50px'}}>
+                                    STT
+                                </th>
+                                <th style={{width:'200px'}}>Tên dịch vụ</th>
+                                <th style={{width:'100px'}}>Giá tiền</th>
+                                <th style={{width:'100px'}}>Hoạt động</th>
+                                <th style={{width:'100px'}}>Đơn vị</th>
+                                <th style={{width:'100px'}}>Mô tả</th>
+                                <th >Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>{this.props.renderService()}</tbody>
+                    </table>
                 </div>
                 <div>
-        </div>
+                </div>
             </div>
         )
     }

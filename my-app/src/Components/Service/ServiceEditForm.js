@@ -50,11 +50,6 @@ class ServiceEditForm extends Component {
       errorOfMota += "Mô tả không được để trống";
     }
     if (errorOfTenDV || errorOfGiaTien || errorOfGhiChu || errorOfMota) {
-      Swal.fire(
-        'Cảnh báo\n\n Dữ liệu không hợp lệ',
-        '',
-        'error'
-      )
       document.getElementById("errorOfTenDV").innerHTML = typeof errorOfTenDV === "undefined" ? "" : errorOfTenDV;
       document.getElementById("errorOfGiaTien").innerHTML = typeof errorOfGiaTien === "undefined" ? "" : errorOfGiaTien;
       document.getElementById("errorOfGhiChu").innerHTML = typeof errorOfGhiChu === "undefined" ? "" : errorOfGhiChu;
@@ -77,8 +72,8 @@ class ServiceEditForm extends Component {
       text: "Bạn có thật sự muốn thêm sửa vụ này?",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Sửa!',
-      cancelButtonText: 'Hủy!',
+      confirmButtonText: 'Sửa',
+      cancelButtonText: 'Hủy',
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
@@ -112,25 +107,6 @@ class ServiceEditForm extends Component {
               <h5 className="card-title">Chỉnh sửa dịch vụ</h5>
               {/* General Form Elements */}
               <form>
-                {/* <div className="row mb-3">
-                  <label
-                    htmlFor="inputMaDichVu"
-                    className="col-sm-2 col-form-label"
-                  >
-                    Mã dịch vụ
-                  </label>
-                  <div className="col-sm-10">
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={this.props.maDV}
-                      onChange={(event) =>
-                        this.props.handleFormmaDVChange(event.target.value)
-                      }
-                      disabled
-                    />
-                  </div>
-                </div> */}
                 <div className="row mb-3">
                   <label
                     htmlFor="inputTenDichVu"
@@ -269,7 +245,6 @@ class ServiceEditForm extends Component {
                   </div>
                 </div>
               </form>
-              {/* End General Form Elements */}
             </div>
           </div>
         </div>

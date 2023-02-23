@@ -3,14 +3,15 @@ import axios from "axios";
 import OrderRoomUpdatetForm from "./OrderRoomUpdateForm";
 import ListOrderRoom from "./ListOrderRoom";
 import Swal from "sweetalert2";
-class OrderRoom extends Component{
-    constructor(props){
+class OrderRoom extends Component {
+    constructor(props) {
         super(props);
-        this.state={
-            data: [],
+        this.state = {
+            urlAPIOrderRoom: 'https://localhost:5001/api/v1/OrderRooms',
+            listOrderRooms: [],
             ShowForm: false,
             AddShowForm: false,
-            display: true,
+            displayListOrderRoom: true,
 
             ngayBatDau: '',
             ngayKetThuc: '',
@@ -22,61 +23,61 @@ class OrderRoom extends Component{
             iddp: "",
         }
     }
-    handleFormiddpChange = (value) =>{
+    handleFormiddpChange = (value) => {
         this.setState({
-            iddp:value
+            iddp: value
         })
     }
-    handleFormTenPhongChange = (value) =>{
+    handleFormTenPhongChange = (value) => {
         this.setState({
-            tenPhong:value
+            tenPhong: value
         })
     }
-    handleFormHoTenChange = (value) =>{
+    handleFormHoTenChange = (value) => {
         this.setState({
-            hoTen:value
+            hoTen: value
         })
     }
-    handleFormNgayBDChange = (value) =>{
+    handleFormNgayBDChange = (value) => {
         this.setState({
-            ngayBatDau:value
+            ngayBatDau: value
         })
     }
-    handleFormNgayKTChange = (value) =>{
+    handleFormNgayKTChange = (value) => {
         this.setState({
-            ngayKetThuc:value
+            ngayKetThuc: value
         })
     }
-    handleFormGiaChange = (value) =>{
+    handleFormGiaChange = (value) => {
         this.setState({
-            giaTien:value
+            giaTien: value
         })
     }
-    handleFormisDeleteChange = (value) =>{
+    handleFormisDeleteChange = (value) => {
         this.setState({
-            isDelete:value
+            isDelete: value
         })
     }
-    getConfigToken(){
+    getConfigToken() {
         let config = {
             headers: {
                 "Authorization": 'Bearer ' + localStorage.getItem("Token"),
                 "Content-type": "application/json"
-              }
+            }
         };
         return config;
     }
     //get api
-    getData(url){
+    getData(url) {
         let config = this.getConfigToken();
         axios.get(url, config)
-        .then((response) => {
-            this.setState({
-                data: response.data
-            })
-        });
+            .then((response) => {
+                this.setState({
+                    listOrderRooms: response.data
+                })
+            });
     }
-    componentDidMount = (url = "https://localhost:5001/api/v1/OrderRooms?PageIndex=1&RowPerPage=500") => {
+    componentDidMount = (url = this.state.urlAPIOrderRoom + "?PageIndex=1&RowPerPage=500") => {
         this.getData(url);
     }
     // Format ngày tháng
@@ -90,76 +91,69 @@ class OrderRoom extends Component{
     }
     // Hàm format số tiền
     formatMoney = money => {
-        if(money && !isNaN(money)){
+        if (money && !isNaN(money)) {
             return money.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1.");
-        }else{
+        } else {
             return money;
         }
     }
     // HTTP PUT 
     OrderRoomUpdateShowForm = (OrderRoom) => {
         this.setState({
-        iddp: OrderRoom.iddp,
-        tenPhong: OrderRoom.tenPhong,
-        hoTen: OrderRoom.hoTen,
-        ngayBatDau: OrderRoom.ngayBatDau,
-        ngayKetThuc: OrderRoom.ngayKetThuc,
-        giaTien: OrderRoom.giaTien,
-        isDelete: OrderRoom.isDelete,
-        ShowForm: !this.state.ShowForm,
-        display: !this.state.display
+            iddp: OrderRoom.iddp,
+            tenPhong: OrderRoom.tenPhong,
+            hoTen: OrderRoom.hoTen,
+            ngayBatDau: OrderRoom.ngayBatDau,
+            ngayKetThuc: OrderRoom.ngayKetThuc,
+            giaTien: OrderRoom.giaTien,
+            isDelete: OrderRoom.isDelete,
+            ShowForm: !this.state.ShowForm,
+            displayListOrderRoom: !this.state.displayListOrderRoom
         });
     };
 
     OrderRoomUpdateCloseForm = () => {
         this.setState({
             ShowForm: !this.state.ShowForm,
-            display: !this.state.display
+            displayListOrderRoom: !this.state.displayListOrderRoom
         })
     }
-    alertComfirm = () => {
-        const swalWithBootstrapButtons = Swal.mixin({
-          customClass: {
-            confirmButton: 'btn btn-primary',
-            cancelButton: 'btn btn-danger'
-          },
-          buttonsStyling: false
-        })
-        swalWithBootstrapButtons.fire({
-          title: 'Xác nhận sửa?',
-          text: "Bạn có thật sự muốn sửa thông tin này?",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Sửa!',
-          cancelButtonText: 'Hủy!',
-          reverseButtons: true
-        }).then((result) => {
-          if (result.isConfirmed) {
-            //console.log(this.state.pid)
-            this.putData(this.state.iddp);
-            // end comfirmed
-          } else if (
-            /* Read more about handling dismissals below */
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            swalWithBootstrapButtons.fire(
-              'Cancelled',
-              'Đã hủy',
-              'success'
-            )
-          }
-        })
-    }
+    alertUpdateComfirm
+        = () => {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-primary',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+            swalWithBootstrapButtons.fire({
+                title: 'Xác nhận sửa?',
+                text: "Bạn có thật sự muốn sửa thông tin này?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sửa!',
+                cancelButtonText: 'Hủy!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.putData(this.state.iddp);
+                    // end comfirmed
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        'Đã hủy',
+                        'success'
+                    )
+                }
+            })
+        }
     putData = (iddp) => {
-        var url = "https://localhost:5001/api/v1/OrderRooms";
+        var url = this.state.urlAPIOrderRoom;
         let config = this.getConfigToken();
-        console.log({
-            iddp: iddp,
-            giaTien: this.state.giaTien,
-            ngayBatDau: this.state.ngayBatDau,
-            ngayKetThuc: this.state.ngayKetThuc,
-            isDelete: this.state.isDelete,
-        })
         axios.put(url, {
             iddp: iddp,
             giaTien: this.state.giaTien,
@@ -167,58 +161,57 @@ class OrderRoom extends Component{
             ngayKetThuc: this.state.ngayKetThuc,
             isDelete: this.state.isDelete,
         }, config)
-        .then(response => {
-            if (response.data) {
-                Swal.fire(
-                    'Đã sửa',
-                    'Thay đổi đã xảy ra',
-                    'success'
-                )
-                this.OrderRoomUpdateCloseForm()
-                this.componentDidMount();
-            }
-            else{
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Cảnh báo',
-                    text: 'Sửa thất bại!',
-                })
-            }
-        })
-        .catch(error => {
-            if (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Cảnh báo',
-                    text: 'Thông tin không hợp lệ!',
-                })
-                console.log(error)
-            }
-        });
+            .then(response => {
+                if (response.data) {
+                    Swal.fire(
+                        'Đã sửa',
+                        'Thay đổi đã xảy ra',
+                        'success'
+                    )
+                    this.OrderRoomUpdateCloseForm()
+                    this.componentDidMount();
+                }
+                else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Cảnh báo',
+                        text: 'Sửa thất bại!',
+                    })
+                }
+            })
+            .catch(error => {
+                if (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Cảnh báo',
+                        text: 'Thông tin không hợp lệ!',
+                    })
+                }
+            });
     };
-    rederData =()=>{
-        return this.state.data.map((item) => {
-            return(
+    rederData = () => {
+        return this.state.listOrderRooms.map((item) => {
+            return (
                 <tr key={item.iddp}>
                     {/* <td>{item.iddp}</td> */}
-                    <td idp = {item.pid}>{item.tenPhong}</td>
-                    <td khid = {item.khid}>{item.hoTen}</td>
+                    <td idp={item.pid}>{item.tenPhong}</td>
+                    <td khid={item.khid}>{item.hoTen}</td>
                     <td>{this.formatDate(item.ngayBatDau)}</td>
                     <td>{this.formatDate(item.ngayKetThuc)}</td>
                     <td>{this.formatMoney(item.giaTien)}</td>
                     <td>{item.isDelete}</td>
-                    <td><button type="button" className="btn btn-success btn-sm" onClick={() =>this.OrderRoomUpdateShowForm(item)}>Chỉnh sửa</button></td>
+                    <td><button type="button" className="btn btn-success btn-sm" onClick={() => this.OrderRoomUpdateShowForm(item)}>Chỉnh sửa</button></td>
                 </tr>
             );
         });
-   }  
-    handleSearch(search){
-        let url = "https://localhost:5001/api/v1/OrderRooms?PageIndex=1&RowPerPage=10" + search;
+    }
+    handleSearch = (search) => {
+        let url = this.state.urlAPIOrderRoom + "?PageIndex=1&RowPerPage=10" + search;
         console.log(url)
         this.componentDidMount(url);
     }
-    render(){
-        return(
+    render() {
+        return (
             <div className="page_right-content">
                 <ListOrderRoom
                     getData={this.getData}
@@ -228,7 +221,7 @@ class OrderRoom extends Component{
                     formatDate={this.formatDate}
                     rederData={this.rederData}
                     handleSearch={this.handleSearch}
-                    display={this.state.display}
+                    displayListOrderRoom={this.state.displayListOrderRoom}
                     OrderRoomUpdateShowForm={this.OrderRoomUpdateShowForm}
                 />
                 <OrderRoomUpdatetForm
@@ -243,7 +236,9 @@ class OrderRoom extends Component{
                     handleFormHoTenChange={this.handleFormHoTenChange}
                     componentDidMount={this.componentDidMount}
                     putData={this.putData}
-                    alertComfirm={this.alertComfirm}
+                    alertUpdateComfirm
+                    ={this.alertUpdateComfirm
+                    }
                     iddp={this.state.iddp}
                     ngayBatDau={this.formatDate(this.state.ngayBatDau)}
                     ngayKetThuc={this.formatDate(this.state.ngayKetThuc)}
