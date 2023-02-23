@@ -1,0 +1,19 @@
+.table-box{
+    width: 1010px;
+    margin-top: 20px;
+    height: 420px;
+    overflow-x: scroll;
+}
+.table-box::-webkit-scrollbar{
+    width: 5px;
+}
+.search_icon{
+    bottom: 0;
+}
+.container{
+    transform: translateX(-10px);
+}
+#main{
+    margin-left: unset;
+    pa
+}
