@@ -1,0 +1,20 @@
+.table-box{
+    width: 1010px;
+    margin-top: 20px;
+    height: 420px;
+    overflow-x: scroll;
+}
+.table-box::-webkit-scrollbar{
+    width: 5px;
+}
+.container{
+    transform: translateX(-10px);
+}
+#add_button-service{
+    margin-right: 110px;
+}
+.refresh, .update, .delete {
+    height: 40px;
+    width: 50px;
+    cursor: pointer;
+}
