@@ -1,0 +1,14 @@
+#serviceGrid{
+}
+.table-box{
+    width: 1000px;
+    margin-top: 20px;
+    height: 400px;
+    overflow: auto;
+}
+.search_icon{
+    bottom: 0;
+}
+.container{
+    transform: translateX();
+}

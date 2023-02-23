@@ -1,0 +1,5 @@
+@import url("./common/Slideshow.css");
+.number-text, .prev, .next{
+    display:  none;
+}
+.sl

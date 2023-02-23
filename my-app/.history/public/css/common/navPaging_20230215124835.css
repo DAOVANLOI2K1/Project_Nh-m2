@@ -1,0 +1,11 @@
+.pagination li{
+    padding: 10px;
+    margin: 0 10px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    font-weight: bold;
+    color: black;
+}
+.pagination li:first-child, .pagination li:last-child{
+    border-radius: 30%;
+}
