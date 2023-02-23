@@ -1,8 +1,0 @@
-#billGrid{
-    margin-top: 20px;
-}
-.refresh, .update, .delete {
-    height: 40px;
-    width: 50px;
-    cursor: pointer;
-}
