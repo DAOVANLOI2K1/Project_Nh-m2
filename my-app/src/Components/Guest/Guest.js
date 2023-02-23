@@ -298,12 +298,22 @@ class Guest extends Component{
         if (!numbersOnly.test(guest.sdt)) {
             errorOfSDT += 'Số điện thoại chỉ chứa số';
         }
+        if (guest.sdt.length > 20) {
+            errorOfSDT = errorOfSDT + "Số điện thoại không vượt quá 20 ký tự!\n";
+        }
        if (guest.sdt === "") {
            errorOfSDT = errorOfSDT + "Số điện thoại không được bỏ trống!\n";
        }
+       var firstPhoneNumber = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+        if(!firstPhoneNumber.test(guest.sdt)){
+            errorOfSDT += 'Đầu số không hợp lệ!';
+        }
 
        // Thêm validate Họ Tên
        let errorOfHoTen = "";
+       if (guest.hoTen > 100) {
+        errorOfHoTen = errorOfHoTen + "Số điện thoại không được bỏ trống!\n";
+        }
        if (guest.hoTen === "") {
            errorOfHoTen = errorOfHoTen + "Tên khách hàng không được bỏ trống!\n";
        }
@@ -356,6 +366,10 @@ class Guest extends Component{
         }
         if (guest.sdt === "") {
             errorOfSDT = errorOfSDT + "Số điện thoại không được bỏ trống!\n";
+        }
+        var firstPhoneNumber = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+        if(!firstPhoneNumber.test(guest.sdt)){
+            errorOfSDT += 'Đầu số không hợp lệ!';
         }
 
         // Thêm validate Họ Tên

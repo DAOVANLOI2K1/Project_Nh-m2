@@ -9,8 +9,8 @@ class FormAccount extends Component {
     if (tenDV === "") {
       errorOfHoTen = errorOfHoTen + "Họ tên không được bỏ trống!\n";
     }
-    if (tenDV.length > 50) {
-      errorOfHoTen += "Họ tên chứa tối đa 50 ký tự.\n";
+    if (tenDV.length > 100) {
+      errorOfHoTen += "Họ tên chứa tối đa 100 ký tự.\n";
     }
     var format = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/;
     if (format.test(tenDV)) {
@@ -24,7 +24,10 @@ class FormAccount extends Component {
     if (!numbersOnly.test(soDienThoai)) {
       errorOfSoDienThoai += 'Số điện thoại có định dạng không đúng';
     }
-    
+    var firstPhoneNumber = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+    if(!firstPhoneNumber.test(soDienThoai)){
+      errorOfSoDienThoai += 'Đầu số không hợp lệ!';
+    }
     if(soDienThoai.length > 20) {
       errorOfSoDienThoai += 'Số điện thoại có độ dài tối đa 20 ký tự';
     }
