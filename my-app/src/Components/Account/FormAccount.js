@@ -24,7 +24,6 @@ class FormAccount extends Component {
     if (!numbersOnly.test(soDienThoai)) {
       errorOfSoDienThoai += 'Số điện thoại có định dạng không đúng';
     }
-    
     if(soDienThoai.length > 20) {
       errorOfSoDienThoai += 'Số điện thoại có độ dài tối đa 20 ký tự';
     }

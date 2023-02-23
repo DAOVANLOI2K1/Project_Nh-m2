@@ -2,16 +2,16 @@ import React, { Component } from "react";
 import axios from "axios"; 
 import RoomUpdatetForm from "./RoomUpdatetForm";
 import ListRoom from "./ListRoom";
-import Pagination from "react-js-pagination";
 import Swal from "sweetalert2";
 class Room extends Component{
     constructor(props){
         super(props);
         this.state={
             data: [],
+            urlApiRooms : 'https://localhost:5001/api/v1/Rooms',
             updateResult: "",
             ShowForm: false,
-            display: true,
+            displayListRoomPage: true,
             //for update
             pid:'',
             tenPhong:'',
@@ -69,16 +69,16 @@ class Room extends Component{
         isDelete: Room.isDelete,
         moTa: Room.moTa,
         ShowForm: !this.state.ShowForm,
-        display: !this.state.display
+        displayListRoomPage: !this.state.displayListRoomPage
         });
     };
     RoomUpdateCloseForm = () => {
         this.setState({
             ShowForm: !this.state.ShowForm,
-            display: !this.state.display
+            displayListRoomPage: !this.state.displayListRoomPage
         })
     }
-    alertComfirm = () => {
+    alertUpdateComfirm = () => {
         const swalWithBootstrapButtons = Swal.mixin({
           customClass: {
             confirmButton: 'btn btn-primary',
@@ -113,7 +113,7 @@ class Room extends Component{
       }
     putData = (pid) => {
         let config = this.getConfigToken();
-        var url = "https://localhost:5001/api/v1/Rooms";
+        var url = this.state.urlApiRooms;
         axios
         .put(url, {
             pid: pid,
@@ -167,10 +167,9 @@ class Room extends Component{
             this.setState({
                 data: response.data
             })
-            console.log(response)
         });
     }
-    componentDidMount = (url = "https://localhost:5001/api/v1/Rooms?PageIndex=1&RowPerPage=500") => {
+    componentDidMount = (url = this.state.urlApiRooms+ "?PageIndex=1&RowPerPage=500") => {
         this.getData(url);
       }
       // Hàm format số tiền
@@ -196,10 +195,11 @@ class Room extends Component{
                 </tr>
             );
         });
-   } 
-    handleSearch(search){
-        let url = "https://localhost:5001/api/v1/Rooms?PageIndex=1&RowPerPage=500" + search;
-        console.log(url)
+    }
+
+    handleSearch = (search) =>{
+        let url = this.state.urlApiRooms + "?PageIndex=1&RowPerPage=500" + search;
+        //console.log(url)
         this.componentDidMount(url);
     }
     render(){
@@ -217,7 +217,7 @@ class Room extends Component{
                         handleRoomFormhoatDongChange={this.handleRoomFormhoatDongChange}
                         handleRoomFormisDeleteChange={this.handleRoomFormisDeleteChange}
                         handleRoomFormmoTaChange={this.handleRoomFormmoTaChange}
-                        alertComfirm={this.alertComfirm}
+                        alertUpdateComfirm={this.alertUpdateComfirm}
                         pid={this.state.pid}
                         tenPhong={this.state.tenPhong}
                         trangThai={this.state.trangThai}
@@ -233,16 +233,9 @@ class Room extends Component{
                         rederData={this.rederData}
                         handleSearch={this.handleSearch}
                         handleUpdate={this.handleUpdate}
-                        display={this.state.display}
+                        displayListRoomPage={this.state.displayListRoomPage}
                         RoomUpdateShowForm={this.RoomUpdateShowForm}
                     />
-                    {/* <Pagination
-                        activePage={this.state.activePage}
-                        itemsCountPerPage={10}
-                        totalItemsCount={450}
-                        pageRangeDisplayed={5}
-                        onChange={this.handleSearch.bind(this)}
-                    /> */}
                 </div>
         );
     }

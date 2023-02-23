@@ -1,9 +1,5 @@
 import React, { Component } from "react";
-import Swal from "sweetalert2";
 class RoomUpdatetForm extends Component{
-    constructor(props){
-        super(props);
-    }
     validateRoomForm = () => {
         // validate giá phòng
         let errorOfGiaPhong = "";
@@ -17,25 +13,12 @@ class RoomUpdatetForm extends Component{
         if (moTa === "") {
             errorOfMoTa = errorOfMoTa + "Mô tả không được bỏ trống!\n";
         }
-    
-        if (errorOfGiaPhong || errorOfMoTa) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Cảnh báo',
-            text: 'Dữ liệu không hợp lệ!',
-          })
+        if (errorOfGiaPhong || errorOfMoTa || giaPhong<=0) {
           document.getElementById("errorOfGiaPhong").innerHTML = typeof errorOfGiaPhong === "undefined" ? "" : errorOfGiaPhong;
           document.getElementById("errorOfMoTa").innerHTML = typeof errorOfMoTa === "undefined" ? "" : errorOfMoTa;
         }
-        else if(giaPhong<=0){
-            Swal.fire({
-                icon: 'error',
-                title: 'Cảnh báo',
-                text: 'Giá phòng không hợp lệ!',
-            })
-        }
         else {
-          this.props.alertComfirm();
+          this.props.alertUpdateComfirm();
         }
       };
     render(){
@@ -47,15 +30,7 @@ class RoomUpdatetForm extends Component{
             <div className="page_right-content">
                 <h5 className="card-title">Sửa thông tin phòng</h5>
             <form>
-                {/* <div className="row mb-3">
-                    <label htmlFor="inputText" className="col-sm-2 col-form-label">PID</label>
-                    <div className="col-sm-10">
-                        <input type="text" className="form-control" 
-                        value={this.props.pid}
-                        onChange={(event) =>this.props.handleRoomFormpidChange(event.target.value)} disabled
-                        />
-                    </div>
-                </div> */}
+
                 <div className="row mb-3">
                     <label htmlFor="inputText" className="col-sm-2 col-form-label">Tên phòng</label>
                     <div className="col-sm-10">

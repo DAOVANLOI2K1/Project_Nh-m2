@@ -10,6 +10,7 @@ class Account extends Component {
     constructor() {
         super();
         this.state = {
+            srcDefault: 'https://localhost:5001/api/v1/Accounts',
             TaiKhoans: [],
             showFormAccount: false,
             showListAccount: true,
@@ -40,7 +41,7 @@ class Account extends Component {
 
     componentDidMount() {
         let config = this.getConfigToken();
-        axios.get("https://localhost:5001/api/v1/Accounts", config)
+        axios.get(this.state.srcDefault, config)
             .then((response) => {
                 this.setState({
                     TaiKhoans: response.data
@@ -64,7 +65,7 @@ class Account extends Component {
         let config = this.getConfigToken();
         //let isInsertSuccess
         axios
-            .post("https://localhost:5001/api/v1/Accounts", {
+            .post(this.state.srcDefault, {
                 hoten: this.state.hoTen,
                 SDT: this.state.soDienThoai,
                 TenDangNhap: this.state.tenDangNhap,
@@ -158,7 +159,7 @@ class Account extends Component {
     }
 
     putData = () => {
-        var url = "https://localhost:5001/api/v1/Accounts";
+        var url = this.state.srcDefault;
         let config = this.getConfigToken();
         //let isEditSuccess;
         axios

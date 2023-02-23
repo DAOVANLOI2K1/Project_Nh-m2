@@ -2,11 +2,6 @@ import React, { Component } from "react";
 import Swal from 'sweetalert2'
 
 class ServiceForm extends Component {
-  // eslint-disable-next-line no-useless-constructor
-  constructor(props) {
-    super(props);
-  }
-
   validateForm() {
     // validate tên dịch vụ
     let errorOfTenDV = "";
@@ -48,11 +43,6 @@ class ServiceForm extends Component {
       errorOfMota += "Mô tả không được để trống";
     }
     if (errorOfTenDV || errorOfGiaTien || errorOfGhiChu || errorOfMota) {
-      Swal.fire(
-        'Cảnh báo\n\n Dữ liệu không hợp lệ',
-        '',
-        'error'
-      )
       document.getElementById("errorOfTenDV").innerHTML = typeof errorOfTenDV === "undefined" ? "" : errorOfTenDV;
       document.getElementById("errorOfGiaTien").innerHTML = typeof errorOfGiaTien === "undefined" ? "" : errorOfGiaTien;
       document.getElementById("errorOfGhiChu").innerHTML = typeof errorOfGhiChu === "undefined" ? "" : errorOfGhiChu;
@@ -75,8 +65,8 @@ class ServiceForm extends Component {
       text: "Bạn có thật sự muốn thêm dịch vụ này?",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Thêm!',
-      cancelButtonText: 'Hủy!',
+      confirmButtonText: 'Thêm',
+      cancelButtonText: 'Hủy',
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
