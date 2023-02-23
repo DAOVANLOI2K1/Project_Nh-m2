@@ -19,10 +19,17 @@ class ServiceEditForm extends Component {
     if (tenDV.length > 50) {
       errorOfTenDV += "Tên dịch vụ chứa tối đa 50 ký tự.\n";
     }
+<<<<<<< HEAD
     // var format = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/;
     // if (format.test(tenDV)) {
     //   errorOfTenDV += "Tên dịch vụ không được chứa ký tự đặc biệt";
     // }
+=======
+    var format = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>?]+/;
+    if (format.test(tenDV)) {
+      errorOfTenDV += "Tên dịch vụ không được chứa ký tự đặc biệt";
+    }
+>>>>>>> loi
 
     // validate cho giá tiền
     let errorOfGiaTien;

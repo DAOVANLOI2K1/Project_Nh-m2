@@ -56,12 +56,20 @@ class ListOrderRoom extends Component{
         }
     }
     insertData(url){
+<<<<<<< HEAD
+=======
+        let config = this.getConfigToken();
+>>>>>>> loi
         axios.post(url, {
             pid: this.state.PID,
             cmt: this.state.CMT,
             ngayBatDau: this.state.NgayBatDau,
             ngayKetThuc: this.state.NgayKetThuc
+<<<<<<< HEAD
         })
+=======
+        }, config)
+>>>>>>> loi
         .then((response) => {
             if(response){
                 Swal.fire('Đặt phòng thành công!', '', 'success')

@@ -18,7 +18,12 @@ class Guest extends Component{
             "activePage": 1,
             "totalItemPageCount": 50,
             "showFormUpdate": false,
+<<<<<<< HEAD
             "showFormCreate": false
+=======
+            "showFormCreate": false,
+            "guest": {}
+>>>>>>> loi
         }
     }
     handlePageChange(pageNumber) {
@@ -108,8 +113,13 @@ class Guest extends Component{
             this.componentDidMount(url, $(".search-input").val(), this.state.activePage);
         });
     }
+<<<<<<< HEAD
     handleDelete(){
         let khid = $("#GuestGrid").find("tr.active").attr("value"); 
+=======
+    handleDelete(target){
+        let khid = $(target).closest("tr").attr("value"); 
+>>>>>>> loi
         let url = this.state.defaultUrl + "/" + khid;
         if(khid != null){
             return (
@@ -134,7 +144,11 @@ class Guest extends Component{
             );
         }
         return (
+<<<<<<< HEAD
             Swal.fire("Bạn cần chọn khách hàng trước khi xóa!")
+=======
+            Swal.fire("Không nhận được id khách hàng!")
+>>>>>>> loi
         );
     }
      // Hàm render tr chứa th
@@ -148,8 +162,14 @@ class Guest extends Component{
                     <th>Giới tính</th>
                     <th>Số Điện thoại</th>
                     <th>Địa chỉ</th>
+<<<<<<< HEAD
                     <th>Ghi Chú</th>
                     <th>Ngày sinh</th>
+=======
+                    <th style={{display: "none"}}>Ghi Chú</th>
+                    <th>Ngày sinh</th>
+                    <th>Thao tác</th>
+>>>>>>> loi
                 </tr>
             </thead>
         );
@@ -157,15 +177,37 @@ class Guest extends Component{
     renderItem(){
         return this.state.data.map((item) => {
             return(
+<<<<<<< HEAD
                 <tr value={item.khid} onClick={(e) => this.handleSelectRow(e.target)}>
+=======
+                <tr value={item.khid}>
+>>>>>>> loi
                     <td>{item.maKH}</td>
                     <td>{item.hoTen}</td>
                     <td>{item.cmt}</td>
                     <td>{item.gioiTinh}</td>
                     <td>{item.sdt}</td>
                     <td>{item.diaChi}</td>
+<<<<<<< HEAD
                     <td>{item.ghiChu}</td>
                     <td>{this.formatDateDisplay(item.ngaySinh)}</td>
+=======
+                    <td style={{display: "none"}}>{item.ghiChu}</td>
+                    <td>{this.formatDateDisplay(item.ngaySinh)}</td>
+                    <td>
+                        <div className="flex_center">
+                            <div className="update" commandtype="update" onClick={(e) => {this.getItemSelected(e.target);
+                                this.setState({showFormUpdate: true})}}>
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </div>
+                            <div className="delete" commandtype="delete" onClick={(e) => this.handleDelete(e.target)}>
+                                <div className="delete_icon">
+                                <i className="fas fa-trash" />
+                                </div>
+                            </div>
+                        </div> 
+                    </td>
+>>>>>>> loi
                 </tr>
             );
         });
@@ -232,6 +274,7 @@ class Guest extends Component{
             );
         }
     }
+<<<<<<< HEAD
     handleForm(){
         let itemActive = $("#GuestGrid").find("tr.active");
         if(this.state.showFormUpdate === true && itemActive.length !== 0){
@@ -249,6 +292,27 @@ class Guest extends Component{
             }
             $("#toolbar").hide();
             return this.renderFormUpdate(guest);
+=======
+    getItemSelected(target){
+        let childsItem = $(target).closest("tr").find("td");
+        let guest = {
+            khid: $(target).closest("tr").attr("value"),
+            maKH: childsItem[0].innerText,
+            hoTen: childsItem[1].innerText,
+            cmt: childsItem[2].innerText,
+            gioiTinh: childsItem[3].innerText,
+            sdt: childsItem[4].innerText,
+            diaChi: childsItem[5].innerText,
+            ghiChu: childsItem[6].innerText,
+            ngaySinh: childsItem[7].innerText
+        }
+        this.setState({guest: guest});
+    }
+    handleForm(){
+        if(this.state.showFormUpdate === true){
+            $("#toolbar").hide();
+            return this.renderFormUpdate(this.state.guest);
+>>>>>>> loi
         }
         if(this.state.showFormCreate === true){
             $("#toolbar").hide();
@@ -298,12 +362,31 @@ class Guest extends Component{
         if (!numbersOnly.test(guest.sdt)) {
             errorOfSDT += 'Số điện thoại chỉ chứa số';
         }
+<<<<<<< HEAD
        if (guest.sdt === "") {
            errorOfSDT = errorOfSDT + "Số điện thoại không được bỏ trống!\n";
        }
 
        // Thêm validate Họ Tên
        let errorOfHoTen = "";
+=======
+        if (guest.sdt.length > 20) {
+            errorOfSDT = errorOfSDT + "Số điện thoại không vượt quá 20 ký tự!\n";
+        }
+       if (guest.sdt === "") {
+           errorOfSDT = errorOfSDT + "Số điện thoại không được bỏ trống!\n";
+       }
+       var firstPhoneNumber = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+        if(!firstPhoneNumber.test(guest.sdt)){
+            errorOfSDT += 'Đầu số không hợp lệ!';
+        }
+
+       // Thêm validate Họ Tên
+       let errorOfHoTen = "";
+       if (guest.hoTen > 100) {
+        errorOfHoTen = errorOfHoTen + "Số điện thoại không được bỏ trống!\n";
+        }
+>>>>>>> loi
        if (guest.hoTen === "") {
            errorOfHoTen = errorOfHoTen + "Tên khách hàng không được bỏ trống!\n";
        }
@@ -357,6 +440,13 @@ class Guest extends Component{
         if (guest.sdt === "") {
             errorOfSDT = errorOfSDT + "Số điện thoại không được bỏ trống!\n";
         }
+<<<<<<< HEAD
+=======
+        var firstPhoneNumber = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+        if(!firstPhoneNumber.test(guest.sdt)){
+            errorOfSDT += 'Đầu số không hợp lệ!';
+        }
+>>>>>>> loi
 
         // Thêm validate Họ Tên
         let errorOfHoTen = "";
@@ -409,20 +499,26 @@ class Guest extends Component{
                         Swal.fire('Đã lưu!', '', 'success')
                         this.updateGuest(guest);
                         this.setState({showFormUpdate: false});
+<<<<<<< HEAD
                         }else{
                             $("#GuestGrid").find("tr.active").removeClass("active");
+=======
+>>>>>>> loi
                         }
                     })}
                 </div>
             );
         }
     }
+<<<<<<< HEAD
     handleUpdateIcon(){
         let itemActive = $("#GuestGrid").find("tr.active");
         if(itemActive.length === 0){
             Swal.fire("Bạn cần chọn khách hàng trước khi sửa!")
         }
     }
+=======
+>>>>>>> loi
     handleCreate(){
         let guest = {};
         $.find(".form_input").map(item => {
@@ -648,6 +744,7 @@ class Guest extends Component{
                         <select className="position_option" option_name="Position" /> */}
                         </div>
                         <div className="flex_center">
+<<<<<<< HEAD
                         <div className="delete flex_center" commandtype="delete" onClick={(e) => this.handleDelete()}>
                             <div className="delete_icon">
                             <i className="fas fa-trash" />
@@ -659,6 +756,8 @@ class Guest extends Component{
                             <i class="fa-solid fa-pen-to-square"></i>
                             </div>
                         </div>
+=======
+>>>>>>> loi
                         <div className="refresh flex_center" commandtype="refresh" onClick={() => this.handleRefresh()}>
                             <div className="refresh_icon">
                             <i class="fa-solid fa-arrows-rotate"></i>

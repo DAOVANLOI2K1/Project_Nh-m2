@@ -51,7 +51,16 @@ class Bill extends Component {
 
     renderbuttonThanhToan(status, cmt) {
         if (status === "Chưa thanh toán") {
+<<<<<<< HEAD
             return (<td><button type="button" className="btn btn-success btn-sm" onClick={() => this.turnOnPayment(cmt)}>Thanh Toán</button></td>);
+=======
+            return (<td>
+                 <div className="flex_center">
+                <div className="pay flex_center" commandtype="pay" onClick={(e) => {this.turnOnPayment(cmt)}}>
+                <i class="fa-solid fa-money-check-dollar"></i>
+                </div></div>
+                </td>);
+>>>>>>> loi
         }
     }
 

@@ -39,6 +39,10 @@
     display: none;
 }
 .common_infor {
+<<<<<<< HEAD
+=======
+    margin-top: 10px;
+>>>>>>> loi
     margin-bottom: 16px;
 }
 .common_infor label, .work_infor label {

@@ -8,4 +8,8 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Api_QLKhachSan_N2
+<<<<<<< HEAD
 build_property.ProjectDir = D:\Admin\Documents\code\Nhom2_usol\Api_QLKhachSan_N2\Api_QLKhachSan_N2\
+=======
+build_property.ProjectDir = D:\Admin\Documents\code\Nhom2_usol\Project_Nh-m2\Api_QLKhachSan_N2\Api_QLKhachSan_N2\
+>>>>>>> loi

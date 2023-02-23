@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "JnL42YPmC5NPwNtPU/APCa6Svyx06QDobC24U8waKqd1v4DPQVBXO7EXAofSeyj2+SolWM5GJWq60vNPkHHFLw==",
   "success": true,
   "projectFilePath": "D:\\Admin\\Documents\\code\\Nhom2_usol\\Api_QLKhachSan_N2\\Api_QLKhachSan_N2\\Api_QLKhachSan_N2.csproj",
+=======
+  "dgSpecHash": "nNgqivDpz0ZyidrYhU01vM12L5o7AAqgCbrCTHd1rulW5Dd3sYMkjzbOSZEby6pGnjQph4eR+1aRP+USGskLWQ==",
+  "success": true,
+  "projectFilePath": "D:\\Admin\\Documents\\code\\Nhom2_usol\\Project_Nh-m2\\Api_QLKhachSan_N2\\Api_QLKhachSan_N2\\Api_QLKhachSan_N2.csproj",
+>>>>>>> loi
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\azure.core\\1.6.0\\azure.core.1.6.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\azure.identity\\1.3.0\\azure.identity.1.3.0.nupkg.sha512",

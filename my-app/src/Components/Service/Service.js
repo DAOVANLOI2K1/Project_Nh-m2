@@ -368,6 +368,7 @@ class Service extends Component {
           <td>{service.donVi}</td>
           <td>{service.moTa}</td>
           <td>
+<<<<<<< HEAD
             <button type="button" className="btn btn-success btn-sm"
               onClick={() => this.onServiceEditForm(service)}
             >
@@ -380,6 +381,18 @@ class Service extends Component {
             >
               Xóa
             </button>
+=======
+            <div className="flex_center">
+                <div className="update" commandtype="update" onClick={(e) => {this.onServiceEditForm(service)}}>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </div>
+                <div className="delete" commandtype="delete" onClick={(e) => this.showDeleteConfirmAlert(service)}>
+                    <div className="delete_icon">
+                    <i className="fas fa-trash" />
+                    </div>
+                </div>
+            </div> 
+>>>>>>> loi
           </td>
         </tr>
       );

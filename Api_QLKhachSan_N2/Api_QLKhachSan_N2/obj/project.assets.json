@@ -8362,11 +8362,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "D:\\Admin\\Documents\\code\\Nhom2_usol\\Api_QLKhachSan_N2\\Api_QLKhachSan_N2\\Api_QLKhachSan_N2.csproj",
       "projectName": "Api_QLKhachSan_N2",
       "projectPath": "D:\\Admin\\Documents\\code\\Nhom2_usol\\Api_QLKhachSan_N2\\Api_QLKhachSan_N2\\Api_QLKhachSan_N2.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
       "outputPath": "D:\\Admin\\Documents\\code\\Nhom2_usol\\Api_QLKhachSan_N2\\Api_QLKhachSan_N2\\obj\\",
+=======
+      "projectUniqueName": "D:\\Admin\\Documents\\code\\Nhom2_usol\\Project_Nh-m2\\Api_QLKhachSan_N2\\Api_QLKhachSan_N2\\Api_QLKhachSan_N2.csproj",
+      "projectName": "Api_QLKhachSan_N2",
+      "projectPath": "D:\\Admin\\Documents\\code\\Nhom2_usol\\Project_Nh-m2\\Api_QLKhachSan_N2\\Api_QLKhachSan_N2\\Api_QLKhachSan_N2.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "D:\\Admin\\Documents\\code\\Nhom2_usol\\Project_Nh-m2\\Api_QLKhachSan_N2\\Api_QLKhachSan_N2\\obj\\",
+>>>>>>> loi
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

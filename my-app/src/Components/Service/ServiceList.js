@@ -8,7 +8,20 @@ class ServiceList extends Component {
         if (this.props.showListService === false ) return null;
         return (
             <div className="container" style={styleForContainer} >
+<<<<<<< HEAD
                 <h1 className="title_content">Danh sách dịch vụ</h1>
+=======
+                <div className="section1 flex_center">
+                    <h1 className="title_content">Danh sách dịch vụ</h1>
+                    <button
+                            className="add_button ms-btn" id="add_button-service"
+                            commandtype="add"
+                            onClick={() => this.props.turnOnServiceForm()}
+                        >
+                            Thêm dịch vụ
+                    </button>
+                </div>
+>>>>>>> loi
                 <div className="search_option">
                     <input
                         type="text"
@@ -20,6 +33,7 @@ class ServiceList extends Component {
                         }}
                     />
                     <i className="fas fa-search search_icon service" />
+<<<<<<< HEAD
                     <button
                         className="add_button ms-btn"
                         commandtype="add"
@@ -27,6 +41,8 @@ class ServiceList extends Component {
                     >
                         Thêm dịch vụ
                     </button>
+=======
+>>>>>>> loi
                 </div>
                 {/* end search bar */}
 

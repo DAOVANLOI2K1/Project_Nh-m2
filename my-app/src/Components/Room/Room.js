@@ -192,7 +192,16 @@ class Room extends Component{
                     <td>{item.hoatDong}</td>
                     <td>{item.isDelete}</td>
                     <td>{item.moTa}</td>
+<<<<<<< HEAD
                     <td><button type="button" className="btn btn-success btn-sm" onClick={()=>this.RoomUpdateShowForm(item)}>Chỉnh sửa</button></td>
+=======
+                    <td>
+                    <div className="flex_center">
+                <div className="update" commandtype="update" onClick={(e) => {this.RoomUpdateShowForm(item)}}>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </div>
+            </div> </td>
+>>>>>>> loi
                 </tr>
             );
         });

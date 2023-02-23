@@ -7,9 +7,19 @@
 .table-box::-webkit-scrollbar{
     width: 5px;
 }
+<<<<<<< HEAD
 .search_icon.service{
     bottom: 0;
 }
 .container{
     transform: translateX(-10px);
 }
+=======
+.container{
+    transform: translateX(-10px);
+}
+#add_button-service{
+    margin-right: 110px;
+}
+
+>>>>>>> loi

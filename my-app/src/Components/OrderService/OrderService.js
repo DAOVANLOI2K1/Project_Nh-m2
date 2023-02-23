@@ -76,6 +76,13 @@ class OrderService extends Component {
         // Thêm validate CMT
         let errorOfCMT = "";
         let CMT = document.getElementById("CMT").value;
+<<<<<<< HEAD
+=======
+        let numberOnly = /^[0-9]+$/;
+        if (!numberOnly.test(CMT)) {
+            errorOfCMT = errorOfCMT + "CMT không hợp lệ!\n";
+        }
+>>>>>>> loi
         if (CMT === "") {
             errorOfCMT = errorOfCMT + "CMT không được bỏ trống!\n";
         }
@@ -84,7 +91,11 @@ class OrderService extends Component {
         let errorOfTenPhong = "";
         let TenPhong = document.getElementById("TenPhong").value;
         if (TenPhong === "") {
+<<<<<<< HEAD
             errorOfTenPhong = errorOfTenPhong + "Mã phòng không được bỏ trống!\n";
+=======
+            errorOfTenPhong = errorOfTenPhong + "Tên phòng không được bỏ trống!\n";
+>>>>>>> loi
         }
 
         // Thêm validate MaDV

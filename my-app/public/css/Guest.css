@@ -202,11 +202,20 @@
 .refresh, .update, .delete {
     height: 40px;
     width: 50px;
+<<<<<<< HEAD
     border-radius: 4px;
     border: 1px solid #bbb;
     margin-left: 5px;
     cursor: pointer;
     background-color: #bbb;
+=======
+    cursor: pointer;
+}
+.refresh{
+    border: 1px solid #ccc;
+    background-color: #ccc;
+    border-radius: 20%;
+>>>>>>> loi
 }
 .refresh_icon {
     height: 20px;
@@ -222,7 +231,10 @@
 .delete_icon {
     height: 20px;
     width: 7px;
+<<<<<<< HEAD
     opacity: 0.7;
+=======
+>>>>>>> loi
     color: rgb(255, 0, 0);
 }
 .tables {
