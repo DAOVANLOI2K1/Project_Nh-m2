@@ -1,0 +1,10 @@
+#billGrid{
+    overflow: hidden;
+    margin-top: 20px;
+}
+#billGrid tr{
+    width: calc(100% / 7);
+}
+#billGrid .{
+    width: 200px;
+}

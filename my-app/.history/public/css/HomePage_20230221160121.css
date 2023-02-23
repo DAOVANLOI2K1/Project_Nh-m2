@@ -1,0 +1,8 @@
+@import url("./common/Slideshow.css");
+
+.number-text, .prev, .next{
+    display:  none;
+}
+.slide, .dot{
+    border: unset;
+}
