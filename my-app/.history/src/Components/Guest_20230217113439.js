@@ -1,0 +1,245 @@
+import React, { Component } from "react";
+import axios from "axios";
+import $, {data, get} from "jquery";
+import Pagination from "react-js-pagination";
+import Swal from "sweetalert2";
+import FormGuest from "./FormGuest";
+
+class Guest extends Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            "data": [],
+            "defaultUrl": "https://localhost:5001/api/v1/Guests",
+            "search": "",
+            "pagenumber": 1,
+            "rowsofpage": 10,
+            "remainingRows": 10,
+            "total": 50,
+            "activePage": 1,
+            "totalItemPageCount": 50,
+            "showFormUpdate": false
+        }
+    }
+    handlePageChange(pageNumber) {
+        this.setState({activePage: pageNumber});
+        $("#GuestGrid").find("tr.active").removeClass("active");
+        this.handlePaging(pageNumber, $(".search_input").val())
+    }
+    handlePaging(number, search){
+        // let number = $(".page_navigate .active").attr("value");
+        if(number !== null){
+            let url = this.state.defaultUrl + "?pagenumber=" + number + 
+            "&rowsofpage=" + this.state.rowsofpage;
+            if(search !== ""){
+                url += "&search=" + search;
+            }
+            this.componentDidMount(url, search, number);
+        }
+    }
+    getData(url){
+        axios.get(url)
+        .then((response) => {
+            this.setState({
+                data: response.data
+            });
+        });
+    }
+    getTotalData(search, number){
+        let url = this.state.defaultUrl + "?pagenumber=1&rowsofpage=-1";
+        if(search)
+        {
+            url += "&search=" + search;
+        }
+        axios.get(url)
+        .then((response) => {
+            let totalCeil = Math.ceil((response.data.length)/(this.state.rowsofpage));
+            let totalFloor = Math.floor((response.data.length)/(this.state.rowsofpage));
+            this.setState({
+                total: response.data.length,
+                totalItemPageCount: totalCeil,
+            });
+            // set Số lượng khách hàng trên từng trang hiện trên màn hình hiện tại
+            let remainingRows = this.state.rowsofpage;
+            if(number > totalFloor){
+                remainingRows = (response.data.length) - totalFloor * (this.state.rowsofpage);
+            }
+            this.setState({
+                remainingRows: remainingRows
+            });
+        });
+    }
+    componentDidMount = (url = this.state.defaultUrl + "?pagenumber=1&rowsofpage=" + this.state.rowsofpage, search = "", number = 1) => {
+        this.getData(url);
+        this.getTotalData(search, number);
+      }
+      // Format ngày tháng
+    formatDate = dateSrc => {
+        let date = new Date(dateSrc),
+            year = date.getFullYear().toString(),
+            month = (date.getMonth() + 1).toString().padStart(2, '0'),
+            day = date.getDate().toString().padStart(2, '0');
+
+        return `${day}-${month}-${year}`;
+    }
+    handleSelectRow(target){
+        $("#GuestGrid").find("tr.active").removeClass("active");
+        $(target).closest("tr").toggleClass("active");
+    }
+    deleteGuest(url){
+        axios.delete(url)
+        .then((response) => {
+            url = this.state.defaultUrl + "?pagenumber=" + this.state.activePage + "&rowsofpage=" + this.state.rowsofpage; 
+            if($(".search-input").val()){
+                url += "&search=" + $(".search-input").val();
+            }
+            this.componentDidMount(url, $(".search-input").val(), this.state.activePage);
+        });
+    }
+    handleDelete(){
+        let khid = $("#GuestGrid").find("tr.active").attr("value"); 
+        let url = this.state.defaultUrl + "/" + khid;
+        return (
+            <div>
+                {Swal.fire({
+                    title: 'Do you want to save the changes?',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Save',
+                    denyButtonText: `Don't save`,
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                    Swal.fire('Saved!', '', 'success')
+                    this.deleteGuest(url);
+                    } else if (result.isDenied) {
+                    Swal.fire('Changes are not saved', '', 'info')
+                    $("#GuestGrid").find("tr.active").removeClass("active");
+                    } else{
+                        $("#GuestGrid").find("tr.active").removeClass("active");
+                    }
+                })}
+            </div>
+        );
+    }
+    renderItem(){
+        return this.state.data.map((item) => {
+            return(
+                <tr value={item.khid} onClick={(e) => this.handleSelectRow(e.target)}>
+                    <td>{item.maKH}</td>
+                    <td>{item.hoTen}</td>
+                    <td>{item.cmt}</td>
+                    <td>{item.gioiTinh}</td>
+                    <td>{item.sdt}</td>
+                    <td>{item.diaChi}</td>
+                    <td>{item.ghiChu}</td>
+                    <td>{this.formatDate(item.ngaySinh)}</td>
+                </tr>
+            );
+        });
+      }
+    handleRefresh(){
+        $(".search_input").val("");
+        this.handlePageChange(1, "");
+    }
+    renderTable(){
+        return(
+        <div>
+            <div className="section3 tables" id="guestgrid" toolbar="toolbar" show_option="show_option">
+                        <div className="table" style={{display: 'none'}}>
+                            <div className="col" fieldname="employeeID" datatype="guid">ID</div>
+                            <div className="col" fieldname="employeeCode">Mã nhân viên</div>
+                            <div className="col" fieldname="employeeName">Họ và tên</div>
+                            <div className="col" fieldname="gender" datatype="enum">Giới tính</div>
+                            <div className="col" fieldname="dateOfBirth" datatype="date">Ngày sinh</div>
+                            <div className="col" fieldname="phoneNumber">Điện thoại</div>
+                            <div className="col" fieldname="email">Email</div>
+                            <div className="col" fieldname="positionName">Chức vụ</div>
+                            <div className="col" fieldname="departmentName">Phòng ban</div>
+                            <div className="col" fieldname="salary" datatype="money">Lương cơ bản</div>
+                            <div className="col" fieldname="workStatus" datatype="enum">Tình trạng công việc</div>
+                        </div>
+                        <table id="GuestGrid">
+                            {this.props.renderthead()}
+                            <tbody>
+                                {this.renderItem()}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="collab flex_center" id="colab_table">
+                    <span>Hiển thị <span style={{fontWeight: 'bold'}} className="count_datatable">01-{this.state.remainingRows}/{this.state.total}</span> khách hàng</span>
+                    <div className="page_navigate">
+                        <Pagination
+                        activePage={this.state.activePage}
+                        itemsCountPerPage={10}
+                        totalItemsCount={this.state.totalItemPageCount * 10}
+                        pageRangeDisplayed={5}
+                        onChange={this.handlePageChange.bind(this)}
+                        />
+                    </div>
+                    <span className="count_rows count_datatable">{this.state.rowsofpage} khách hàng/trang</span>
+                    </div>
+            </div>
+        );
+    }
+    renderFormUpdate(){
+        return(
+            <FormGuest/>
+        );
+    }
+    handleFormUpdate(){
+        if(this.state.showFormUpdate === true){
+            $(".search_option").hide();
+            $("#toolbar").hide();
+            return this.renderFormUpdate();
+        }
+        return this.renderTable();
+    }
+    render(){
+        return(
+            <div className="page_right-content">
+                <div className="toolbar" id="toolbar">
+                    <div className="section1 flex_center">
+                        <h1 className="title_content">Danh sách khách hàng</h1>
+                        <div className="buttons">
+                        <button className="add_button ms-btn" commandtype="add" onClick={() => this.props.getColumnConfig()}>
+                            <i className="fas fa-user-plus add_icon" />
+                            Thuê phòng
+                        </button>
+                        </div>
+                    </div>
+                    <div className="section2 flex_center" id="show_option">
+                        <div className="show_options flex_center">
+                        <div className="search_option">
+                            <input type="text" className="search_input ms-input" option_name="Search" placeholder="Tìm kiếm theo Tên khách hàng" onChange={(e) => {
+                                this.handlePaging(this.state.activePage, e.target.value)}} />
+                            <i className="fas fa-search search_icon search_icon" />
+                        </div>
+                        {/* <select className="department_option" option_name="Department" />
+                        <select className="position_option" option_name="Position" /> */}
+                        </div>
+                        <div className="flex_center">
+                        <div className="delete flex_center" commandtype="delete" onClick={(e) => this.handleDelete()}>
+                            <div className="delete_icon">
+                            <i className="fas fa-trash" />
+                            </div>
+                        </div>
+                        <div className="update flex_center" commandtype="update" onClick={(e) => this.setState({showFormUpdate: true})}>
+                            <div className="update_icon">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            </div>
+                        </div>
+                        <div className="refresh flex_center" commandtype="refresh" onClick={() => this.handleRefresh()}>
+                            <div className="refresh_icon">
+                            <i class="fa-solid fa-arrows-rotate"></i>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                    {this.handleFormUpdate()}
+            </div>
+        );
+    }
+}
+export default Guest;

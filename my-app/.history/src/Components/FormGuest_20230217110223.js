@@ -1,0 +1,73 @@
+import React, {Component} from "react";
+
+class FormGuest extends Component{
+    render(){
+        return(
+            <div className="container">
+                <div className="form">
+                <div className="form_closeicon flex_center" onClick={}>
+                    <i className="fas fa-times form_icon" />
+                </div>
+                <div className="form_header">
+                    <div className="form_header-title">
+                    <h1 className="name">Thông tin khách hàng</h1>
+                    </div>
+                </div>
+                <div className="form_content">
+                    <div className="form_content-right">
+                    <div className="common_infor">
+                        <div className="infor-title">
+                        <h1 className="name">A. Thông tin chung:</h1>
+                        </div>
+                        <div className="infor_form">
+                        <div className="infor_form-left">
+                            <label htmlFor>Mã khách hàng (<span style={{color: '#ff4747'}}>*</span>)</label>
+                            <input type="text" className="ms-input form_input" placeholder="Mã nhân viên" />
+                            <label htmlFor>Giới tính</label>
+                            <select className="select_option">
+                            <option value="Male" selected>Nam</option>
+                            <option value="Female">Nữ</option>
+                            <option value="Unknown">Khác</option>
+                            </select>
+                            <label htmlFor>Số điện thoại (<span style={{color: '#ff4747'}}>*</span>)</label>
+                            <input type="number" className="ms-input form_input" placeholder="Số điện thoại" />
+                            <label htmlFor>Địa chỉ</label>
+                            <input type="Address" className="ms-input form_input" placeholder="Địa chỉ" />
+                        </div>
+                        <div className="infor_form-right">
+                            <label htmlFor>Họ và tên (<span style={{color: '#ff4747'}}>*</span>)</label>
+                            <input type="text" className="ms-input form_input" placeholder="Họ và tên" />
+                            <label htmlFor>Ngày sinh</label>
+                            <input type="date" className="ms-input form_input" placeholder="Ngày sinh" />
+                            <label htmlFor>CMT (<span style={{color: '#ff4747'}}>*</span>)</label>
+                            <input type="CMT" className="ms-input form_input" placeholder="Chứng minh thư" />
+                        </div>
+                        </div>
+                    </div>
+                    <div className="work_infor">
+                        <div className="infor-title">
+                        <h1 className="name">A. Thông tin Thêm:</h1>
+                        </div>
+                        <div className="infor_form">
+                        <div className="infor_form-left">
+                            <label htmlFor>Người sửa</label>
+                            <input type="Text" className="ms-input form_input" placeholder="Tên người sửa"/>                             
+                        </div>
+                        <div className="infor_form-right">
+                        <label htmlFor>Ghi chú</label>
+                        <textarea type="Text" className="ms-input form_input" placeholder="Điền ghi chú của bạn vào đây!"/>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div className="form_footer flex_center">
+                    <button className="ms-btn cancel_btn">Hủy</button>
+                    <button className="ms-btn ms-btn_icon"><i className="far fa-save icon" />Lưu</button>
+                </div>
+                </div>
+            </div>
+        );
+    }
+}
+export default FormGuest;
